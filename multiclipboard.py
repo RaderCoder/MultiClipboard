@@ -9,9 +9,12 @@ def save_data(filepath, data):
         json.dump(data, f)
 
 def load_items(filepath):
-    with open(filepath, "r") as f:
-        data = json.load(f)
-        return data
+    try:
+        with open(filepath, "r") as f:
+            data = json.load(f)
+            return data
+    except:
+        return {}
 
 if len(sys.argv) == 2:
     command = sys.argv[1]
@@ -20,7 +23,7 @@ if len(sys.argv) == 2:
     if command == "save":
         key = input("Enter a Key: ")
         data[key] = clipboard.paste()
-        save_items(SAVED_DATA, data)
+        save_data(SAVED_DATA, data)
     elif command =="load":
         print("load")
     elif command == "list":
